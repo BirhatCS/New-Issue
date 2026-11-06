@@ -3,11 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page with Location Banner</title>
+  <title>AuraBoutique - Girls' Dresses Online Shopping</title>
   <style>
-    body {
+    :root {
+      --primary: #ff4b72;
+      --primary-dark: #e0355b;
+      --accent: #fbc531;
+      --dark: #2f3640;
+      --light: #f5f6fa;
+      --gray: #718093;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Arial, sans-serif;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
     }
 
     /* Modal overlay styling */
@@ -22,53 +38,233 @@
       justify-content: center;
       align-items: center;
       z-index: 1000;
+      animation: fadeIn 0.3s ease;
     }
 
-    /* Card styling */
     .banner-card {
       background: #ffffff;
-      padding: 24px;
-      border-radius: 12px;
-      max-width: 380px;
-      width: 85%;
+      padding: 30px 24px;
+      border-radius: 16px;
+      max-width: 400px;
+      width: 90%;
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     }
 
     .banner-card h3 {
       margin-top: 0;
-      color: #1a1a1a;
-      font-size: 1.25rem;
+      color: var(--dark);
+      font-size: 1.4rem;
+      margin-bottom: 12px;
     }
 
     .banner-card p {
-      color: #555555;
+      color: var(--gray);
       font-size: 0.95rem;
-      line-height: 1.4;
-      margin-bottom: 20px;
+      line-height: 1.5;
+      margin-bottom: 24px;
     }
 
     .banner-btn {
-      background-color: #007bff;
+      background-color: var(--primary);
       color: #ffffff;
       border: none;
       padding: 12px 20px;
       font-size: 1rem;
       font-weight: bold;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
       width: 100%;
       transition: background-color 0.2s ease;
     }
 
     .banner-btn:hover {
-      background-color: #0056b3;
+      background-color: var(--primary-dark);
+    }
+
+    /* Navbar */
+    header {
+      background: #ffffff;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .cart-btn {
+      background: var(--light);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .hero-btn {
+      background: var(--primary);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .hero-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Product Section */
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--dark);
+      border-left: 5px solid var(--primary);
+      padding-left: 12px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 16px;
+    }
+
+    .product-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+
+    .product-price {
+      color: var(--primary);
+      font-size: 1.15rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .buy-btn {
+      width: 100%;
+      background: var(--dark);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .buy-btn:hover {
+      background: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      background: #1e272e;
+      color: white;
+      text-align: center;
+      padding: 30px;
+      margin-top: 60px;
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Custom In-App Banner Modal -->
+  <!-- Location Banner Modal (Preserved & Styled) -->
   <div id="locationBanner" class="banner-overlay">
     <div class="banner-card">
       <h3>Enable Location Services</h3>
@@ -77,10 +273,95 @@
     </div>
   </div>
 
-  <img
-    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkvKFperaAtM3PYXUIebatcP6VU5kVfsOvx3a-TdhPzA&s=10"
-    style="width:100%;"
-  />
+  <!-- Header & Navigation -->
+  <header>
+    <a href="#" class="logo">AuraDresses</a>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">New Arrivals</a></li>
+      <li><a href="#">Casual Dresses</a></li>
+      <li><a href="#">Party Wear</a></li>
+    </ul>
+    <button class="cart-btn" onclick="alert('Your cart is currently empty!')">🛒 Cart (<span id="cartCount">0</span>)</button>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>New Summer Collection</h1>
+    <p>Discover trendy, elegant, and comfortable dresses crafted for every occasion.</p>
+    <a href="#shop" class="hero-btn">Shop Now</a>
+  </section>
+
+  <!-- Product Catalog -->
+  <div class="container" id="shop">
+    <h2 class="section-title">Trending Dresses</h2>
+    <div class="product-grid">
+      
+      <!-- Item 1 -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80" alt="Floral Summer Dress" class="product-image">
+        <div class="product-info">
+          <div class="product-title">Floral Spring Midi Dress</div>
+          <div class="product-price">$45.00</div>
+          <button class="buy-btn" onclick="addToCart()">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fb1b?auto=format&fit=crop&w=600&q=80" alt="Evening Party Dress" class="product-image">
+        <div class="product-info">
+          <div class="product-title">Satin Evening Party Dress</div>
+          <div class="product-price">$68.00</div>
+          <button class="buy-btn" onclick="addToCart()">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=600&q=80" alt="Casual Bohemian Dress" class="product-image">
+        <div class="product-info">
+          <div class="product-title">Boho Chic Wrap Dress</div>
+          <div class="product-price">$38.00</div>
+          <button class="buy-btn" onclick="addToCart()">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Elegant Cocktail Dress" class="product-image">
+        <div class="product-info">
+          <div class="product-title">Velvet Cocktail Dress</div>
+          <div class="product-price">$55.00</div>
+          <button class="buy-btn" onclick="addToCart()">Add to Cart</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 AuraDresses Online Shopping. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Script to handle location button dismissal and cart counter -->
+  <script>
+    const allowLocationBtn = document.getElementById('allowLocationBtn');
+    const locationBanner = document.getElementById('locationBanner');
+    let cartCount = 0;
+
+    allowLocationBtn.addEventListener('click', () => {
+      // Hide the modal when clicked
+      locationBanner.style.display = 'none';
+    });
+
+    function addToCart() {
+      cartCount++;
+      document.getElementById('cartCount').innerText = cartCount;
+      alert('Success! Item added to your shopping cart.');
+    }
+  </script>
   
 <!-- Get Location script-->
   <script>
